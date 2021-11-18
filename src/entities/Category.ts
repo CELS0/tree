@@ -1,7 +1,7 @@
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, Tree, TreeChildren, TreeParent } from "typeorm";
 
-@Entity()
-@Tree("closure-table")
+@Entity('categories')
+@Tree("adjacency-list")
 export class Category {
   @PrimaryGeneratedColumn('increment') id: number
 
