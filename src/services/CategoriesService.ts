@@ -1,4 +1,4 @@
-import { getCustomRepository, getManager } from "typeorm";
+import { getCustomRepository } from "typeorm";
 import { Category } from "../entities/Category";
 import { CategoriesRepository } from "../repositories/CategoriesRepository";
 
@@ -13,36 +13,22 @@ interface ICategory {
 class CategoriesService {
     async create() {
         const categoriesRepository = getCustomRepository(CategoriesRepository);
-        const categotyRequest: ICategory = {
-            name: 'name',
-        };
 
-        const category = categoriesRepository.create(categotyRequest);
-        await categoriesRepository.save(category);
-        const categotyRequest2: ICategory = {
-            name: 'name 1',
-            parent: category,
-        };
-        await categoriesRepository.save(categotyRequest2);
+        const test = categoriesRepository.create({ name: "a1" });
+        await categoriesRepository.save(test);
+        // const a1 = new Category();
+        // a1.name = "a1";
+        // const y = await categoriesRepository.save(a1);
 
-
-        const categotyRequest3: ICategory = {
-            name: 'name 3',
-            parent: category,
-        };
-        await categoriesRepository.save(categotyRequest3);
+        // const a11 = new Category();
+        // a11.name = "a11";
+        // a11.parent = a1;
+        // await categoriesRepository.save(a11);
 
 
-        const categotyRequest4: ICategory = {
-            name: 'name 4',
-            parent: category,
-        };
-        await categoriesRepository.save(categotyRequest4);
+        // const trees = await categoriesRepository.findTrees();
 
-
-        const trees = await categoriesRepository.find({ relations: ['children'] })
-
-        return trees;
+        return test;
     }
 }
 
