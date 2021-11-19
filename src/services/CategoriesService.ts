@@ -18,7 +18,8 @@ class CategoriesService {
         const tesst: ICategory = {
             name: "celso"
         }
-        categoriesRepository.save(tesst)
+        const category = categoriesRepository.create(tesst)
+        categoriesRepository.save(category)
 
         const tress = await categoriesRepository.findTrees();
 
