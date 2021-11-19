@@ -1,4 +1,4 @@
-import { getCustomRepository } from "typeorm";
+import { getCustomRepository, getManager, getTreeRepository } from "typeorm";
 import { Category } from "../entities/Category";
 import { CategoriesRepository } from "../repositories/CategoriesRepository";
 
@@ -12,26 +12,17 @@ interface ICategory {
 
 class CategoriesService {
     async create() {
-        const categoriesRepository = getCustomRepository(CategoriesRepository);
+        const manager = getManager();
+        const categoriesRepository =  manager.getTreeRepository(Category)
 
-        const test = categoriesRepository.create({ name: "a1" });
-        await categoriesRepository.save(test);
+        const tesst: ICategory = {
+            name: "celso"
+        }
+        categoriesRepository.save(tesst)
 
-        const test1 = categoriesRepository.create({ name: "a11", parent:test });
-        await categoriesRepository.save(test1);
-        // const a1 = new Category();
-        // a1.name = "a1";
-        // const y = await categoriesRepository.save(a1);
+        const tress = await categoriesRepository.findTrees();
 
-        // const a11 = new Category();
-        // a11.name = "a11";
-        // a11.parent = a1;
-        // await categoriesRepository.save(a11);
-
-
-        // const trees = await categoriesRepository.findTrees();
-        const tree = await categoriesRepository.find();
-        return tree;
+        return tress
     }
 }
 

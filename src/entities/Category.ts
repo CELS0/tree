@@ -1,10 +1,8 @@
-import {Entity, Tree, Column, PrimaryGeneratedColumn, TreeChildren, TreeParent, TreeLevelColumn, ManyToOne, OneToMany} from "typeorm";
+import {Entity, Tree, Column, PrimaryGeneratedColumn, TreeChildren, TreeParent, ManyToOne, OneToMany} from "typeorm";
 
 @Entity()
 @Tree('closure-table', {
-    closureTableName: "category_closure",
-    ancestorColumnName: (column) => "ancestor_" + column.propertyName,
-    descendantColumnName: (column) => "descendant_" + column.propertyName,
+    closureTableName: 'category'
 })
 export class Category {
     @PrimaryGeneratedColumn('increment')
@@ -13,9 +11,11 @@ export class Category {
     @Column()
     name: string;
 
+    @ManyToOne(() => Category, category => category.parent)
     @TreeChildren()
     children: Category[];
 
+    @OneToMany(() => Category, category => category.id)
     @TreeParent()
     parent: Category;
 }
