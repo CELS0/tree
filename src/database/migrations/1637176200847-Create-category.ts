@@ -21,6 +21,11 @@ export class CreateCategory1637176200847 implements MigrationInterface {
             name: 'parentId',
             type: 'int',
             isNullable: true,
+          },
+          {
+            name: 'childrenId',
+            type: 'int',
+            isNullable: true,
           }
         ],
       }),
@@ -32,6 +37,13 @@ export class CreateCategory1637176200847 implements MigrationInterface {
       referencedTableName: "categories",
       onDelete: "CASCADE"
   }));
+
+  await queryRunner.createForeignKey("categories", new TableForeignKey({
+    columnNames: ["childrenId"],
+    referencedColumnNames: ["id"],
+    referencedTableName: "categories",
+    onDelete: "CASCADE"
+}));
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {

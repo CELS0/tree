@@ -16,6 +16,9 @@ class CategoriesService {
 
         const test = categoriesRepository.create({ name: "a1" });
         await categoriesRepository.save(test);
+
+        const test1 = categoriesRepository.create({ name: "a11", parent:test });
+        await categoriesRepository.save(test1);
         // const a1 = new Category();
         // a1.name = "a1";
         // const y = await categoriesRepository.save(a1);
@@ -27,8 +30,8 @@ class CategoriesService {
 
 
         // const trees = await categoriesRepository.findTrees();
-
-        return test;
+        const tree = await categoriesRepository.find();
+        return tree;
     }
 }
 
