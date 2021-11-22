@@ -10,15 +10,17 @@ class CategotyRepository
     try {
       const connection = await DBManager.getConnection();
       const repository = connection.getCustomRepository(CategotyRepository);
-      const categoty = repository.create({name,parent});
-      await repository.save(categoty);
+      // const categoty = repository.create({name,parent});
+      // await repository.save(categoty);
 
-      const category1 = new Category();
+      const category = new Category();
 
-      category1.name = name;
-      category1.parent = categoty;
+      const category1 = await repository.findOne(parent);
 
-      await repository.save(category1);
+      category.name = name;
+      category.parent = category1;
+
+      await repository.save(category);
     } catch (err) {
       throw console.error(err);
     }
