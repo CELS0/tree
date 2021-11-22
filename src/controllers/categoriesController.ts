@@ -7,7 +7,7 @@ class CategoriesController {
         const {name, parent} = request.body;
         const categoriesService = new CategoriesService();
         await categoriesService.create(name, parent)
-        return response.status(201);
+        return response.status(201).json();
     }
     async list(request: Request, response: Response) {
         const categoriesService = new CategoriesService();

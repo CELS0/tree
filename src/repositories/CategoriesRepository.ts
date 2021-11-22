@@ -12,8 +12,6 @@ class CategotyRepository
       const repository = connection.getCustomRepository(CategotyRepository);
       const categoty = repository.create({name,parent});
       await repository.save(categoty);
-
-      return categoty;
     } catch (err) {
       throw console.error(err);
     }

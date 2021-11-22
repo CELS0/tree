@@ -6,7 +6,7 @@ class CategoriesService {
           await categotyRepository.store(name, parent);
     }
     async list() {
-        const categotyRepository = new CategotyRepository();
+       const categotyRepository = new CategotyRepository();
        const tree = await categotyRepository.list();
 
        return tree;
