@@ -3,9 +3,15 @@ import { CategoriesService } from "../services/CategoriesService";
 
 
 class CategoriesController {
-    async handle(request: Request, response: Response) {
+    async create(request: Request, response: Response) {
+        const {name, parent} = request.body;
         const categoriesService = new CategoriesService();
-        const tree = await categoriesService.create()
+        await categoriesService.create(name, parent)
+        return response.status(201);
+    }
+    async list(request: Request, response: Response) {
+        const categoriesService = new CategoriesService();
+        const tree = await categoriesService.list();
         return response.status(201).json(tree);
     }
 }

@@ -4,7 +4,7 @@ export class CreateCategory1637176200847 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'category_closure',
+        name: 'category',
         columns: [
           {
             name: 'id',
@@ -18,7 +18,7 @@ export class CreateCategory1637176200847 implements MigrationInterface {
             type: 'varchar',
           },
           {
-            name: 'parentId',
+            name: 'parent_id',
             type: 'int',
             isNullable: true,
           }
@@ -26,9 +26,9 @@ export class CreateCategory1637176200847 implements MigrationInterface {
         foreignKeys: [
           {
             name: 'FKparentId',
-            referencedTableName: 'category_closure',
+            referencedTableName: 'category',
             referencedColumnNames: ['id'],
-            columnNames: ['parentId'],
+            columnNames: ['parent_id'],
             onDelete: 'CASCADE',
             onUpdate: 'CASCADE',
           }
@@ -38,6 +38,6 @@ export class CreateCategory1637176200847 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('category_closure');
+    await queryRunner.dropTable('category');
   }
 }
